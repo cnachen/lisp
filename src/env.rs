@@ -22,7 +22,7 @@ impl Env {
     }
 
     pub fn get(&self, name: impl AsRef<str>) -> Option<Expr> {
-        match self.vars.get(name.as_ref()) {
+        match self.vars.get(name.as_ref().to_ascii_lowercase().as_str()) {
             Some(value) => Some(value.clone()),
             None => self
                 .parent
@@ -32,7 +32,8 @@ impl Env {
     }
 
     pub fn set(&mut self, name: impl AsRef<str>, val: Expr) {
-        self.vars.insert(name.as_ref().into(), val);
+        self.vars
+            .insert(name.as_ref().to_ascii_lowercase().into(), val);
     }
 
     pub fn update(&mut self, data: Rc<RefCell<Self>>) {

@@ -37,7 +37,7 @@ impl Lexer {
             .replace("(", " ( ")
             .replace(")", " ) ")
             .split_whitespace()
-            .map(|x| match x.to_lowercase().as_str() {
+            .map(|x| match x.to_ascii_lowercase().as_str() {
                 "(" => Token::LParen,
                 ")" => Token::RParen,
                 "lambda" => Token::Lambda,
