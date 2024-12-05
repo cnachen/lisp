@@ -1,4 +1,9 @@
 [package]
+authors = ["Cnachen CLI <cnachencli@live.cn>"]
+description = "A LISP implementation written in Rust"
+keywords = ["lisp"]
+license = "MIT"
+repository = "https://github.com/cnachen/lisp"
 name = "lisp"
 version = "0.1.0"
 edition = "2021"
