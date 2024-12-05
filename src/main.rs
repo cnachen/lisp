@@ -43,6 +43,9 @@ fn repl(env: &mut Rc<RefCell<Env>>) -> anyhow::Result<()> {
         let readline = rl.readline(if open_parens > 0 { ".. " } else { "-> " });
         match readline {
             Ok(line) => {
+                if line.trim().is_empty() {
+                    continue;
+                }
                 buffer.push_str(&line);
                 buffer.push('\n');
 
