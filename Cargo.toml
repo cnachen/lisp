@@ -10,3 +10,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.94"
+dirs = "5.0.1"
+rustyline = "15.0.0"
