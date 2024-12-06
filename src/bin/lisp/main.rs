@@ -1,5 +1,9 @@
+mod cmd;
+
+use clap::Parser as _;
 use lisp::Env;
 use lisp::Evaluator;
+use lisp::Parser;
 use rustyline::error::ReadlineError;
 use rustyline::DefaultEditor;
 use std::cell::RefCell;
@@ -13,11 +17,17 @@ fn main() -> anyhow::Result<()> {
     let mut stdin = io::stdin();
     let mut env = Rc::new(RefCell::new(Env::new()));
 
+    let cli = cmd::Cli::parse();
+
     if !stdin.is_terminal() {
         let mut source = String::new();
         stdin.read_to_string(&mut source)?;
 
-        Ok(println!("{:#?}", Evaluator::eval(source, &mut env)?))
+        if cli.parse {
+            Ok(println!("{:#?}", Parser::parse(source)?))
+        } else {
+            Ok(println!("{:#?}", Evaluator::eval(source, &mut env)?))
+        }
     } else {
         repl(&mut env)
     }
